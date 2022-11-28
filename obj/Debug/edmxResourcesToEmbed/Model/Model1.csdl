@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="freelanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Employer">
+    <Key>
+      <PropertyRef Name="EmployerID" />
+    </Key>
+    <Property Name="EmployerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="EmployerPhone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="EmployerMail" Type="String" MaxLength="330" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OrderBoards" Relationship="Self.FK_OrderBoard_Employer" FromRole="Employer" ToRole="OrderBoard" />
+  </EntityType>
+  <EntityType Name="OrderBoard">
+    <Key>
+      <PropertyRef Name="OrderBoardID" />
+    </Key>
+    <Property Name="OrderBoardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployerID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employer" Relationship="Self.FK_OrderBoard_Employer" FromRole="OrderBoard" ToRole="Employer" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_OrderBoard_Role" FromRole="OrderBoard" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="Self.FK_OrderBoard_User" FromRole="OrderBoard" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OrderBoards" Relationship="Self.FK_OrderBoard_Role" FromRole="Role" ToRole="OrderBoard" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="UserPhone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="UserMail" Type="String" MaxLength="330" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="UserSkills" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OrderBoards" Relationship="Self.FK_OrderBoard_User" FromRole="User" ToRole="OrderBoard" />
+  </EntityType>
+  <Association Name="FK_OrderBoard_Employer">
+    <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+    <End Role="OrderBoard" Type="Self.OrderBoard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employer">
+        <PropertyRef Name="EmployerID" />
+      </Principal>
+      <Dependent Role="OrderBoard">
+        <PropertyRef Name="EmployerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderBoard_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="OrderBoard" Type="Self.OrderBoard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="OrderBoard">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderBoard_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="OrderBoard" Type="Self.OrderBoard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="OrderBoard">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="freelanceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employers" EntityType="Self.Employer" />
+    <EntitySet Name="OrderBoards" EntityType="Self.OrderBoard" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_OrderBoard_Employer" Association="Self.FK_OrderBoard_Employer">
+      <End Role="Employer" EntitySet="Employers" />
+      <End Role="OrderBoard" EntitySet="OrderBoards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderBoard_Role" Association="Self.FK_OrderBoard_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="OrderBoard" EntitySet="OrderBoards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderBoard_User" Association="Self.FK_OrderBoard_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="OrderBoard" EntitySet="OrderBoards" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,126 @@
+﻿<Page x:Class="freelance.View.Pages.EmployerPage.MainEmployerPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:freelance.View.Pages.EmployerPage"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" 
+             d:DesignWidth="1000"
+             FontFamily="Consolas">
+    <Grid>
+        <Border HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    CornerRadius="25"
+                    Width="600"
+                    Height="400"
+                    Background="#4D3825"
+                    Effect="{StaticResource MaterialDesignElevationShadow16}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="270"/>
+                    <RowDefinition Height="130"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Проверка информации о компании, введите необходимую иформацию"
+                               FontSize="20"
+                               TextWrapping="Wrap"
+                               Width="450"
+                               Foreground="White"
+                               TextAlignment="Center"/>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0 10 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Company"
+                                                     Margin="0 5 5 0"
+                                                     Foreground="#D4A84F"/>
+                            <TextBox Width="240"
+                                       x:Name="TbCompanyName"
+                                       FontSize="15"
+                                       Foreground="#D4A84F"
+                                       materialDesign:HintAssist.Hint="Введите название компании"
+                                       materialDesign:TextFieldAssist.HasClearButton="True"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0 5 5 0">
+                            <materialDesign:PackIcon Kind="DriveDocument"
+                                                     Margin="0 5 5 0"
+                                                     Foreground="#D4A84F"/>
+                            <TextBox Width="240"
+                                       FontSize="15"
+                                       Foreground="#D4A84F"
+                                       materialDesign:HintAssist.Hint="Введите ИНН"
+                                       materialDesign:TextFieldAssist.HasClearButton="True"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0 5 5 0">
+                            <materialDesign:PackIcon Kind="Email"
+                                                     Margin="0 5 5 0"
+                                                     Foreground="#D4A84F"/>
+                            <TextBox Width="240"
+                                       
+                                       FontSize="15"
+                                       Foreground="#D4A84F"
+                                       materialDesign:HintAssist.Hint="Введите ФИО ген. директора"
+                                       materialDesign:TextFieldAssist.HasClearButton="True"/>
+                        </StackPanel>
+
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Margin="0 20 0 0">
+                            <Button Background="#D4A84F"
+                                    Foreground="White"
+                                    x:Name="BtnCheck"
+                                    Click="BtnCheck_Click"
+                                    BorderThickness="0"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    materialDesign:ButtonProgressAssist.Value="-1"
+                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                    materialDesign:ButtonProgressAssist.IsIndeterminate="True">
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Check"
+                                                             Margin="0 1 5 0"/>
+                                    <TextBlock Text="Проверить"
+                                               FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0 15 0 0"
+                                Grid.Row="1"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center">
+                        <Button Background="#D4A84F"
+                                    Foreground="White"
+                                    x:Name="BtnLoginEmployer"
+                                    Click="BtnLoginEmployer_Click"
+                                    BorderThickness="0"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    materialDesign:ButtonProgressAssist.Value="-1"
+                                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                                    materialDesign:ButtonProgressAssist.IsIndeterminate="True">
+                            <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="LoginVariant"
+                                                             Margin="0 1 5 0"/>
+                                <TextBlock Text="Войти"
+                                               FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+                    
+    </Grid>
+</Page>
